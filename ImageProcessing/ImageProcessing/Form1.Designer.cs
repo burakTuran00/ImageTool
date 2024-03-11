@@ -28,18 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ImageOpenerButton = new Button();
             pictureBox1 = new PictureBox();
             pictureBox2 = new PictureBox();
-            textBoxRotationAngle = new TextBox();
-            ToRotateButton = new Button();
             ToCropImage = new Button();
             textBoxX = new TextBox();
             textBoxY = new TextBox();
             textBoxWidth = new TextBox();
             textBoxHeight = new TextBox();
-            ZoomInButton = new Button();
-            ZoomOutButton = new Button();
             bightnessEnhancementButton = new Button();
             textBoxBrightness = new TextBox();
             hScrollBar1 = new HScrollBar();
@@ -50,20 +45,18 @@
             convertGreyToolStripMenuItem = new ToolStripMenuItem();
             convertBinaryToolStripMenuItem = new ToolStripMenuItem();
             edgeDetectionToolStripMenuItem = new ToolStripMenuItem();
+            gaussToolStripMenuItem = new ToolStripMenuItem();
+            zoomToolStripMenuItem = new ToolStripMenuItem();
+            ınToolStripMenuItem = new ToolStripMenuItem();
+            outToolStripMenuItem = new ToolStripMenuItem();
+            rotateToolStripMenuItem = new ToolStripMenuItem();
+            clock90ToolStripMenuItem = new ToolStripMenuItem();
+            antiClock90ToolStripMenuItem = new ToolStripMenuItem();
+            addAndMultypToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
-            // 
-            // ImageOpenerButton
-            // 
-            ImageOpenerButton.Location = new Point(80, 349);
-            ImageOpenerButton.Name = "ImageOpenerButton";
-            ImageOpenerButton.Size = new Size(161, 29);
-            ImageOpenerButton.TabIndex = 0;
-            ImageOpenerButton.Text = "ImageOpenerButton";
-            ImageOpenerButton.UseVisualStyleBackColor = true;
-            ImageOpenerButton.Click += ImageOpenerButton_Click;
             // 
             // pictureBox1
             // 
@@ -80,23 +73,7 @@
             pictureBox2.Size = new Size(184, 274);
             pictureBox2.TabIndex = 3;
             pictureBox2.TabStop = false;
-            // 
-            // textBoxRotationAngle
-            // 
-            textBoxRotationAngle.Location = new Point(567, 351);
-            textBoxRotationAngle.Name = "textBoxRotationAngle";
-            textBoxRotationAngle.Size = new Size(52, 27);
-            textBoxRotationAngle.TabIndex = 5;
-            // 
-            // ToRotateButton
-            // 
-            ToRotateButton.Location = new Point(376, 349);
-            ToRotateButton.Name = "ToRotateButton";
-            ToRotateButton.Size = new Size(163, 29);
-            ToRotateButton.TabIndex = 6;
-            ToRotateButton.Text = "ToRotateButton";
-            ToRotateButton.UseVisualStyleBackColor = true;
-            ToRotateButton.Click += ToRotateButton_Click;
+            pictureBox2.Click += pictureBox2_Click;
             // 
             // ToCropImage
             // 
@@ -136,29 +113,9 @@
             textBoxHeight.Size = new Size(52, 27);
             textBoxHeight.TabIndex = 11;
             // 
-            // ZoomInButton
-            // 
-            ZoomInButton.Location = new Point(345, 546);
-            ZoomInButton.Name = "ZoomInButton";
-            ZoomInButton.Size = new Size(161, 29);
-            ZoomInButton.TabIndex = 12;
-            ZoomInButton.Text = "ZoomInButton";
-            ZoomInButton.UseVisualStyleBackColor = true;
-            ZoomInButton.Click += ZoomInButton_Click;
-            // 
-            // ZoomOutButton
-            // 
-            ZoomOutButton.Location = new Point(523, 546);
-            ZoomOutButton.Name = "ZoomOutButton";
-            ZoomOutButton.Size = new Size(161, 29);
-            ZoomOutButton.TabIndex = 13;
-            ZoomOutButton.Text = "ZoomOutButton";
-            ZoomOutButton.UseVisualStyleBackColor = true;
-            ZoomOutButton.Click += ZoomOutButton_Click;
-            // 
             // bightnessEnhancementButton
             // 
-            bightnessEnhancementButton.Location = new Point(345, 620);
+            bightnessEnhancementButton.Location = new Point(323, 537);
             bightnessEnhancementButton.Name = "bightnessEnhancementButton";
             bightnessEnhancementButton.Size = new Size(260, 29);
             bightnessEnhancementButton.TabIndex = 14;
@@ -168,14 +125,14 @@
             // 
             // textBoxBrightness
             // 
-            textBoxBrightness.Location = new Point(611, 620);
+            textBoxBrightness.Location = new Point(589, 537);
             textBoxBrightness.Name = "textBoxBrightness";
             textBoxBrightness.Size = new Size(73, 27);
             textBoxBrightness.TabIndex = 15;
             // 
             // hScrollBar1
             // 
-            hScrollBar1.Location = new Point(70, 667);
+            hScrollBar1.Location = new Point(48, 584);
             hScrollBar1.Name = "hScrollBar1";
             hScrollBar1.Size = new Size(614, 26);
             hScrollBar1.TabIndex = 16;
@@ -207,31 +164,88 @@
             // 
             // propertyToolStripMenuItem
             // 
-            propertyToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { convertGreyToolStripMenuItem, convertBinaryToolStripMenuItem, edgeDetectionToolStripMenuItem });
+            propertyToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { convertGreyToolStripMenuItem, convertBinaryToolStripMenuItem, edgeDetectionToolStripMenuItem, gaussToolStripMenuItem, zoomToolStripMenuItem, rotateToolStripMenuItem, addAndMultypToolStripMenuItem });
             propertyToolStripMenuItem.Name = "propertyToolStripMenuItem";
             propertyToolStripMenuItem.Size = new Size(79, 24);
             propertyToolStripMenuItem.Text = "Property";
+            propertyToolStripMenuItem.Click += propertyToolStripMenuItem_Click;
             // 
             // convertGreyToolStripMenuItem
             // 
             convertGreyToolStripMenuItem.Name = "convertGreyToolStripMenuItem";
-            convertGreyToolStripMenuItem.Size = new Size(195, 26);
+            convertGreyToolStripMenuItem.Size = new Size(210, 26);
             convertGreyToolStripMenuItem.Text = "Convert Grey";
             convertGreyToolStripMenuItem.Click += convertGreyToolStripMenuItem_Click;
             // 
             // convertBinaryToolStripMenuItem
             // 
             convertBinaryToolStripMenuItem.Name = "convertBinaryToolStripMenuItem";
-            convertBinaryToolStripMenuItem.Size = new Size(195, 26);
+            convertBinaryToolStripMenuItem.Size = new Size(210, 26);
             convertBinaryToolStripMenuItem.Text = "Convert Binary";
             convertBinaryToolStripMenuItem.Click += convertBinaryToolStripMenuItem_Click;
             // 
             // edgeDetectionToolStripMenuItem
             // 
             edgeDetectionToolStripMenuItem.Name = "edgeDetectionToolStripMenuItem";
-            edgeDetectionToolStripMenuItem.Size = new Size(195, 26);
+            edgeDetectionToolStripMenuItem.Size = new Size(210, 26);
             edgeDetectionToolStripMenuItem.Text = "Edge Detection";
             edgeDetectionToolStripMenuItem.Click += edgeDetectionToolStripMenuItem_Click;
+            // 
+            // gaussToolStripMenuItem
+            // 
+            gaussToolStripMenuItem.Name = "gaussToolStripMenuItem";
+            gaussToolStripMenuItem.Size = new Size(210, 26);
+            gaussToolStripMenuItem.Text = "Gauss ";
+            gaussToolStripMenuItem.Click += gaussToolStripMenuItem_Click;
+            // 
+            // zoomToolStripMenuItem
+            // 
+            zoomToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ınToolStripMenuItem, outToolStripMenuItem });
+            zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
+            zoomToolStripMenuItem.Size = new Size(210, 26);
+            zoomToolStripMenuItem.Text = "Zoom";
+            // 
+            // ınToolStripMenuItem
+            // 
+            ınToolStripMenuItem.Name = "ınToolStripMenuItem";
+            ınToolStripMenuItem.Size = new Size(116, 26);
+            ınToolStripMenuItem.Text = "In";
+            ınToolStripMenuItem.Click += ınToolStripMenuItem_Click;
+            // 
+            // outToolStripMenuItem
+            // 
+            outToolStripMenuItem.Name = "outToolStripMenuItem";
+            outToolStripMenuItem.Size = new Size(116, 26);
+            outToolStripMenuItem.Text = "Out";
+            outToolStripMenuItem.Click += outToolStripMenuItem_Click;
+            // 
+            // rotateToolStripMenuItem
+            // 
+            rotateToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clock90ToolStripMenuItem, antiClock90ToolStripMenuItem });
+            rotateToolStripMenuItem.Name = "rotateToolStripMenuItem";
+            rotateToolStripMenuItem.Size = new Size(210, 26);
+            rotateToolStripMenuItem.Text = "Rotate";
+            // 
+            // clock90ToolStripMenuItem
+            // 
+            clock90ToolStripMenuItem.Name = "clock90ToolStripMenuItem";
+            clock90ToolStripMenuItem.Size = new Size(175, 26);
+            clock90ToolStripMenuItem.Text = "Clock 90";
+            clock90ToolStripMenuItem.Click += clock90ToolStripMenuItem_Click;
+            // 
+            // antiClock90ToolStripMenuItem
+            // 
+            antiClock90ToolStripMenuItem.Name = "antiClock90ToolStripMenuItem";
+            antiClock90ToolStripMenuItem.Size = new Size(175, 26);
+            antiClock90ToolStripMenuItem.Text = "AntiClock 90";
+            antiClock90ToolStripMenuItem.Click += antiClock90ToolStripMenuItem_Click;
+            // 
+            // addAndMultypToolStripMenuItem
+            // 
+            addAndMultypToolStripMenuItem.Name = "addAndMultypToolStripMenuItem";
+            addAndMultypToolStripMenuItem.Size = new Size(210, 26);
+            addAndMultypToolStripMenuItem.Text = "Sum And Multiply";
+            addAndMultypToolStripMenuItem.Click += addAndMultypToolStripMenuItem_Click;
             // 
             // Form1
             // 
@@ -242,18 +256,13 @@
             Controls.Add(hScrollBar1);
             Controls.Add(textBoxBrightness);
             Controls.Add(bightnessEnhancementButton);
-            Controls.Add(ZoomOutButton);
-            Controls.Add(ZoomInButton);
             Controls.Add(textBoxHeight);
             Controls.Add(textBoxWidth);
             Controls.Add(textBoxY);
             Controls.Add(textBoxX);
             Controls.Add(ToCropImage);
-            Controls.Add(ToRotateButton);
-            Controls.Add(textBoxRotationAngle);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
-            Controls.Add(ImageOpenerButton);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "Form1";
@@ -272,19 +281,13 @@
         }
 
         #endregion
-
-        private Button ImageOpenerButton;
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
-        private TextBox textBoxRotationAngle;
-        private Button ToRotateButton;
         private Button ToCropImage;
         private TextBox textBoxX;
         private TextBox textBoxY;
         private TextBox textBoxWidth;
         private TextBox textBoxHeight;
-        private Button ZoomInButton;
-        private Button ZoomOutButton;
         private Button bightnessEnhancementButton;
         private TextBox textBoxBrightness;
         private HScrollBar hScrollBar1;
@@ -295,5 +298,13 @@
         private ToolStripMenuItem convertGreyToolStripMenuItem;
         private ToolStripMenuItem convertBinaryToolStripMenuItem;
         private ToolStripMenuItem edgeDetectionToolStripMenuItem;
+        private ToolStripMenuItem gaussToolStripMenuItem;
+        private ToolStripMenuItem zoomToolStripMenuItem;
+        private ToolStripMenuItem ınToolStripMenuItem;
+        private ToolStripMenuItem outToolStripMenuItem;
+        private ToolStripMenuItem rotateToolStripMenuItem;
+        private ToolStripMenuItem clock90ToolStripMenuItem;
+        private ToolStripMenuItem antiClock90ToolStripMenuItem;
+        private ToolStripMenuItem addAndMultypToolStripMenuItem;
     }
 }

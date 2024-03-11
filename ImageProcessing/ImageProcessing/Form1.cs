@@ -6,49 +6,13 @@ namespace ImageProcessing
     public partial class Form1 : Form
     {
         private float zoomFactor = 1.0f;
+        public static int rotateValue = 0;
 
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void ImageOpenerButton_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image Files (*.jpg; *.jpeg; *.png; *.bmp)|*.jpg; *.jpeg; *.png; *.bmp|All files (*.*)|*.*";
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    pictureBox1.Image = Image.FromFile(openFileDialog.FileName);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error loading image: " + ex.Message);
-                }
-            }
-        }
-
-        private void ToRotateButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Load the original image
-                Bitmap originalImage = new Bitmap(pictureBox1.Image);
-
-                // Convert the image to binary
-                Bitmap rotatedImage = RotateImage(originalImage, int.Parse(textBoxRotationAngle.Text));
-
-                // Display rotated image in PictureBox
-                pictureBox2.Image = rotatedImage;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error loading image: " + ex.Message);
-            }
-        }
 
         private void ToCropImage_Click(object sender, EventArgs e)
         {
@@ -72,56 +36,8 @@ namespace ImageProcessing
             }
         }
 
-        private void ZoomInButton_Click(object sender, EventArgs e)
-        {
-            zoomFactor += 0.1f;
-            ApplyZoom();
-        }
 
-        private void ZoomOutButton_Click(object sender, EventArgs e)
-        {
-            zoomFactor -= 0.1f;
-            ApplyZoom();
-        }
 
-        private Bitmap ToBinary(Bitmap original)
-        {
-            Bitmap binary = new Bitmap(original.Width, original.Height);
-
-            for (int y = 0; y < original.Height; y++)
-            {
-                for (int x = 0; x < original.Width; x++)
-                {
-                    Color pixel = original.GetPixel(x, y);
-                    int avg = (pixel.R + pixel.G + pixel.B) / 3;
-
-                    // Apply threshold (e.g., 128)
-                    Color binaryPixel = avg < 128 ? Color.Black : Color.White;
-
-                    binary.SetPixel(x, y, binaryPixel);
-                }
-            }
-
-            return binary;
-        }
-
-        private Bitmap RotateImage(Bitmap original, float angle)
-        {
-            Bitmap rotated = new Bitmap(original.Width, original.Height);
-
-            using (Graphics g = Graphics.FromImage(rotated))
-            {
-                // Set the rotation point to the center of the image
-                g.TranslateTransform(original.Width / 2, original.Height / 2);
-                g.RotateTransform(angle);
-                g.TranslateTransform(-original.Width / 2, -original.Height / 2);
-
-                // Draw the image onto the rotated graphics
-                g.DrawImage(original, new Point(0, 0));
-            }
-
-            return rotated;
-        }
 
         private Bitmap CropImage(Bitmap original, Rectangle cropArea)
         {
@@ -249,8 +165,8 @@ namespace ImageProcessing
             try
             {
                 Bitmap originalImage = new Bitmap(pictureBox1.Image);
-                Bitmap grayscaleImage = ToBinary(originalImage);
-                pictureBox2.Image = grayscaleImage;
+                Bitmap binaryImage = BinaryScale.ToBinary(originalImage);
+                pictureBox2.Image = binaryImage;
             }
             catch (Exception ex)
             {
@@ -270,6 +186,80 @@ namespace ImageProcessing
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void gaussToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Bitmap filteredImage = Gauss.ApplyGaussianFilter(new Bitmap(pictureBox1.Image));
+            pictureBox2.Image = filteredImage;
+        }
+
+        private void ýnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            zoomFactor += 0.1f;
+            ApplyZoom();
+        }
+
+        private void outToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            zoomFactor -= 0.1f;
+            ApplyZoom();
+        }
+
+        private void propertyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void clock90ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                rotateValue += 90;
+                // Load the original image
+                Bitmap originalImage = new Bitmap(pictureBox1.Image);
+
+                // Convert the image to binary
+                Bitmap rotatedImage = Rotation.RotateImage(originalImage, rotateValue);
+
+                // Display rotated image in PictureBox
+                pictureBox2.Image = rotatedImage;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading image: " + ex.Message);
+            }
+        }
+
+        private void antiClock90ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                rotateValue -= 90;
+                // Load the original image
+                Bitmap originalImage = new Bitmap(pictureBox1.Image);
+
+                // Convert the image to binary
+                Bitmap rotatedImage = Rotation.RotateImage(originalImage, rotateValue);
+
+                // Display rotated image in PictureBox
+                pictureBox2.Image = rotatedImage;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading image: " + ex.Message);
+            }
+        }
+
+        private void addAndMultypToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2();
+            form2.Show();
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
